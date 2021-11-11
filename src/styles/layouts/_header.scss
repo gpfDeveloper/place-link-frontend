@@ -1,0 +1,11 @@
+.header {
+  height: 7rem;
+  font-size: $default-font-size;
+  color: white;
+  background-color: $color-grey-dark;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

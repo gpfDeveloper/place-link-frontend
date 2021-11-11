@@ -1,0 +1,22 @@
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  color: $color-grey-light;
+  a {
+    &:hover {
+      color: white;
+    }
+  }
+  @media only screen and (max-width: $screen-small) {
+    display: none;
+  }
+}
+
+.nav-links-mobile {
+  font-size: 2.4rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles/main.scss";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./layouts/Layout";
+import Users from "./pages/Users";
+import UserPlaces from "./pages/UserPlaces";
+import Authenticate from "./pages/Authenticate";
+import { AuthContextProvider } from "./context/auth-context";
+import NewPlace from "./pages/NewPlace";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AuthContextProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Users />} />
+            <Route path="/:uid/places" element={<UserPlaces />} />
+            <Route path="/places/new" element={<NewPlace />} />
+            <Route path="/authenticate" element={<Authenticate />} />
+          </Routes>
+        </Layout>
+      </AuthContextProvider>
+    </BrowserRouter>
   );
 }
 
