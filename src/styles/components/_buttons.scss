@@ -26,4 +26,10 @@
       border: 2px solid white;
     }
   }
+  &--red {
+    background-color: $color-red;
+  }
+  &--blue {
+    background-color: $color-blue;
+  }
 }

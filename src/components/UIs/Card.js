@@ -1,9 +1,5 @@
-const Card = ({ children, className, style }) => {
-  return (
-    <div className={`card ${className}`} style={style}>
-      {children}
-    </div>
-  );
+const Card = ({ children, className }) => {
+  return <div className={`card ${className}`}>{children}</div>;
 };
 
 export default Card;

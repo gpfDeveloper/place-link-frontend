@@ -11,6 +11,11 @@
     gap: 2rem;
   }
 
+  .card:hover {
+    background-color: $color-grey-dark;
+    color: white;
+  }
+
   &__info {
     h2 {
       color: $color-primary;
