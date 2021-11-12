@@ -12,7 +12,7 @@ const NavLinks = ({ classes }) => {
   }
   const logoutHandler = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
   return (
     <ul className={className}>
@@ -21,12 +21,17 @@ const NavLinks = ({ classes }) => {
       </li>
       {!isAuth && (
         <li>
-          <Link to="/authenticate">Authenticate</Link>{" "}
+          <Link to="/authenticate">Sign Up</Link>{" "}
         </li>
       )}
       {isAuth && (
         <li>
-          <Link to="/places/new">New Place</Link>{" "}
+          <Link to="/places/u1">My Places</Link>{" "}
+        </li>
+      )}
+      {isAuth && (
+        <li>
+          <Link to="/places/new">Add Place</Link>{" "}
         </li>
       )}
       {isAuth && (
