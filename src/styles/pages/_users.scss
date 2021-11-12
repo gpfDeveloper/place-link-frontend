@@ -1,0 +1,19 @@
+.user-list {
+  margin: 4rem 0;
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.user-item {
+  &__content {
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__info {
+    h2 {
+      color: $color-primary;
+    }
+  }
+}
