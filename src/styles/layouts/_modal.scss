@@ -1,0 +1,27 @@
+.modal {
+  position: fixed;
+  height: 40rem;
+  top: 22vh;
+  left: 10%;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: $shadow-dark;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  z-index: 2;
+  &__header {
+    border-radius: 10px 10px 0 0;
+    padding: 2rem;
+    background-color: $color-primary;
+    color: white;
+  }
+  &__actions {
+    margin: 2rem;
+    align-self: stretch;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

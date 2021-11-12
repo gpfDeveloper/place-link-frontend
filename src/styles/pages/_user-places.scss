@@ -20,6 +20,11 @@
     margin-bottom: 4rem;
     padding: 2rem;
   }
+  &__image {
+    img {
+      border-radius: 10px 10px 0 0;
+    }
+  }
   &__actions {
     display: flex;
     gap: 2rem;
