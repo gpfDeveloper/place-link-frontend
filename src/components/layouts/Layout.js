@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SideDrawer from "../components/SideDrawer";
+import SideDrawer from "../UIs/SideDrawer";
 
 import Footer from "./Footer";
 import Header from "./Header";

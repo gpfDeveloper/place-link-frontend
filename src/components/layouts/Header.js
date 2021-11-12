@@ -1,6 +1,6 @@
-import Logo from "../components/Logo";
-import NavLinks from "../components/NavLinks";
-import Toggle from "../components/Toggle";
+import Logo from "../UIs/Logo";
+import NavLinks from "../UIs/NavLinks";
+import Toggle from "../UIs/Toggle";
 
 const Header = ({ onOpenSidebar }) => {
   return (

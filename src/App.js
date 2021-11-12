@@ -1,6 +1,6 @@
 import "./styles/main.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./layouts/Layout";
+import Layout from "./components/layouts/Layout";
 import Users from "./pages/Users";
 import UserPlaces from "./pages/UserPlaces";
 import Authenticate from "./pages/Authenticate";
