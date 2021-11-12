@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 
 import Card from "../UIs/Card";
 import Modal from "../UIs/Modal";
+import Map from "../UIs/Map";
 
-const PlaceItem = ({ id, image, title, address, description }) => {
+const PlaceItem = ({ id, image, title, address, description, coordinates }) => {
   const [showMap, setShowMap] = useState(false);
   const closeMapHandler = () => setShowMap(false);
   const openMapHandler = () => setShowMap(true);
@@ -14,11 +15,13 @@ const PlaceItem = ({ id, image, title, address, description }) => {
         isShow={showMap}
         onCancel={closeMapHandler}
         header={address}
-        actions={<button className="btn btn--blue" onClick={closeMapHandler}>CLOSE</button>}
+        actions={
+          <button className="btn btn--blue" onClick={closeMapHandler}>
+            CLOSE
+          </button>
+        }
       >
-        <div className="map-container">
-          <h2>MAP</h2>
-        </div>
+        <Map center={coordinates} zoom={16} />
       </Modal>
       <li className="place-item">
         <Card className="place-item__content">
