@@ -23,7 +23,8 @@
     color: $color-primary;
     border: 2px solid $color-primary;
     &:hover {
-      border: 2px solid white;
+      background-color: $color-primary;
+      color: white;
     }
   }
   &--red {

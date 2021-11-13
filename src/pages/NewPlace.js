@@ -23,11 +23,11 @@ const NewPlace = () => {
 
   const placeSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(formState.inputs); 
+    console.log(formState.inputs);
   };
 
   return (
-    <form className="form" onSubmit={placeSubmitHandler}>
+    <form className="form mt-4" onSubmit={placeSubmitHandler}>
       <h2 className="center">Add Place</h2>
       <Input
         id="title"

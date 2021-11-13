@@ -56,6 +56,7 @@ const UpdatePlace = () => {
   );
 
   const identifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId);
+  console.log(identifiedPlace);
 
   useEffect(() => {
     if (identifiedPlace) {
@@ -100,7 +101,7 @@ const UpdatePlace = () => {
   }
 
   return (
-    <form className="form" onSubmit={placeUpdateSubmitHandler}>
+    <form className="form mt-4" onSubmit={placeUpdateSubmitHandler}>
       <h2 className="center">Update Place</h2>
       <Input
         id="title"
