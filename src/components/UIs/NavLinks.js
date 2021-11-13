@@ -1,9 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/auth-context";
+import { AuthContext } from "../../contexts/auth-context";
 import { useNavigate } from "react-router";
 
 const NavLinks = ({ classes }) => {
-  const { isAuth, logout } = useAuth();
+  const { isAuth, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   let className = "nav-links";

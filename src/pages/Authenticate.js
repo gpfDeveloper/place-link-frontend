@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 
 import Card from "../components/UIs/Card";
-import { useAuth } from "../contexts/auth-context";
+import { AuthContext } from "../contexts/auth-context";
 import Input from "../components/UIs/Input";
 import {
   VALIDATOR_EMAIL,
@@ -11,7 +11,7 @@ import {
 import { useForm } from "../hooks/use-form";
 
 const Auth = () => {
-  const auth = useAuth();
+  const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
 
   const [formState, inputHandler, setFormData] = useForm(
