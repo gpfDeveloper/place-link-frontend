@@ -32,4 +32,13 @@
   &--blue {
     background-color: $color-blue;
   }
+
+  &:disabled,
+  &:hover:disabled,
+  &:active:disabled {
+    background: #ccc;
+    color: #979797;
+    cursor: not-allowed;
+    filter: brightness(1);
+  }
 }

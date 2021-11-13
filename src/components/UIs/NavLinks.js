@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/auth-context";
+import { useAuth } from "../../contexts/auth-context";
 import { useNavigate } from "react-router";
 
 const NavLinks = ({ classes }) => {
@@ -26,7 +26,7 @@ const NavLinks = ({ classes }) => {
       )}
       {isAuth && (
         <li>
-          <Link to="/places/u1">My Places</Link>{" "}
+          <Link to="/u1/places">My Places</Link>{" "}
         </li>
       )}
       {isAuth && (
