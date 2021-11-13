@@ -25,5 +25,14 @@
     align-self: stretch;
     display: flex;
     justify-content: flex-end;
+    gap: 2rem;
+  }
+  &--delete {
+    height: 24rem;
+    left: 20%;
+    width: 60%;
+    .modal__content {
+      margin-top: 2rem;
+    }
   }
 }
