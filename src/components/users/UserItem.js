@@ -7,7 +7,7 @@ const UserItem = ({ id, image, name, placeCount }) => {
     <li className="user-item">
       <Card>
         <Link className="user-item__content" to={`/${id}/places`}>
-          <Avatar image={image} alt={name}/>
+          <Avatar image={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={name}/>
           <div className="user-item__info">
             <h2>{name}</h2>
             <h3>

@@ -1,51 +1,38 @@
+import { useEffect, useState } from "react";
+import LoadingSpinner from "../components/UIs/LoadingSpinner";
 import UserList from "../components/users/UserList";
+import { useHttpClient } from "../hooks/use-http";
+import ErrorModal from "../components/UIs/ErrorModal";
 
 const Users = () => {
-  const USERS = [
-    {
-      id: "u1",
-      name: "Pengfei",
-      image: "https://avatars.githubusercontent.com/u/73002588?v=4",
-      places: 3,
-    },
-    {
-      id: "u2",
-      name: "Pengfei",
-      image:
-        "https://avatars.githubusercontent.com/u/73002588?v=4",
-      places: 3,
-    },
-    {
-      id: "u3",
-      name: "Pengfei",
-      image:
-        "https://avatars.githubusercontent.com/u/73002588?v=4",
-      places: 3,
-    },
-    {
-      id: "u4",
-      name: "Pengfei",
-      image:
-        "https://avatars.githubusercontent.com/u/73002588?v=4",
-      places: 3,
-    },
-    {
-      id: "u5",
-      name: "Pengfei",
-      image:
-        "https://avatars.githubusercontent.com/u/73002588?v=4",
-      places: 3,
-    },
-    {
-      id: "u6",
-      name: "Pengfei",
-      image:
-        "https://avatars.githubusercontent.com/u/73002588?v=4",
-      places: 3,
-    },
-  ];
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedUsers, setLoadedUsers] = useState();
 
-  return <UserList items={USERS} />;
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/users`
+        );
+        setLoadedUsers(responseData.users);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUsers();
+  }, [sendRequest]);
+
+  return (
+    <>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className="center mb-4 mt-4">
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && loadedUsers && <UserList items={loadedUsers} />}
+    </>
+  );
 };
 
 export default Users;

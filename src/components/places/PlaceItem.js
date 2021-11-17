@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Card from "../UIs/Card";
 import Modal from "../UIs/Modal";
 import Map from "../UIs/Map";
+import { useHttpClient } from "../../hooks/use-http";
+import { AuthContext } from "../../contexts/auth-context";
+import ErrorModal from "../UIs/ErrorModal";
+import LoadingSpinner from "../UIs/LoadingSpinner";
 
-const PlaceItem = ({ id, image, title, address, description, coordinates }) => {
+const PlaceItem = ({
+  id,
+  image,
+  title,
+  address,
+  description,
+  coordinates,
+  creatorId,
+  onDelete,
+}) => {
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const auth = useContext(AuthContext);
   const [showMap, setShowMap] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -14,10 +29,24 @@ const PlaceItem = ({ id, image, title, address, description, coordinates }) => {
 
   const openDeleteModalHandler = () => setShowDeleteModal(true);
   const cancelDeleteModalHandler = () => setShowDeleteModal(false);
-  const confirmDeleteModalHandler = () => setShowDeleteModal(false);
+  const confirmDeleteModalHandler = async () => {
+    setShowDeleteModal(false);
+    try {
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/places/${id}`,
+        "DELETE",
+        null,
+        { Authorization: "Bear " + auth.token }
+      );
+      onDelete(id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
+      <ErrorModal error={error} onClear={clearError} />
       <Modal
         isShow={showMap}
         header={address}
@@ -30,7 +59,7 @@ const PlaceItem = ({ id, image, title, address, description, coordinates }) => {
         <Map center={coordinates} zoom={16} />
       </Modal>
       <Modal
-        className="modal--delete"
+        className="modal--small"
         isShow={showDeleteModal}
         header={"Are you sure?"}
         actions={
@@ -57,8 +86,12 @@ const PlaceItem = ({ id, image, title, address, description, coordinates }) => {
       </Modal>
       <li className="place-item">
         <Card className="place-item__content">
+          {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
-            <img src={image} alt={title} />
+            <img
+              src={`${process.env.REACT_APP_ASSET_URL}/${image}`}
+              alt={title}
+            />
           </div>
           <div className="place-item__info">
             <h2>{title}</h2>
@@ -69,12 +102,16 @@ const PlaceItem = ({ id, image, title, address, description, coordinates }) => {
             <button className="btn" onClick={openMapHandler}>
               VIEW ON MAP
             </button>
-            <Link className="btn btn--blue" to={`/places/${id}`}>
-              EDIT
-            </Link>
-            <button className="btn btn--red" onClick={openDeleteModalHandler}>
-              DELETE
-            </button>
+            {auth.userId === creatorId && (
+              <Link className="btn btn--blue" to={`/places/${id}`}>
+                EDIT
+              </Link>
+            )}
+            {auth.userId === creatorId && (
+              <button className="btn btn--red" onClick={openDeleteModalHandler}>
+                DELETE
+              </button>
+            )}
           </div>
         </Card>
       </li>

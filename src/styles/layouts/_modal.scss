@@ -19,6 +19,7 @@
   }
   &__content {
     flex: 1;
+    padding: 0 2rem;
   }
   &__actions {
     margin: 2rem;
@@ -27,7 +28,7 @@
     justify-content: flex-end;
     gap: 2rem;
   }
-  &--delete {
+  &--small {
     height: 24rem;
     left: 20%;
     width: 60%;

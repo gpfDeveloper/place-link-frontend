@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/auth-context";
 import { useNavigate } from "react-router";
 
 const NavLinks = ({ classes }) => {
-  const { isAuth, logout } = useContext(AuthContext);
+  const { isLoggedIn, logout, userId } = useContext(AuthContext);
   const navigate = useNavigate();
 
   let className = "nav-links";
@@ -20,22 +20,22 @@ const NavLinks = ({ classes }) => {
       <li>
         <Link to="/">Home</Link>
       </li>
-      {!isAuth && (
+      {!isLoggedIn && (
         <li>
-          <Link to="/authenticate">Sign Up</Link>{" "}
+          <Link to="/authenticate">Sign In</Link>{" "}
         </li>
       )}
-      {isAuth && (
+      {isLoggedIn && (
         <li>
-          <Link to="/u1/places">My Places</Link>{" "}
+          <Link to={`/${userId}/places`}>My Places</Link>{" "}
         </li>
       )}
-      {isAuth && (
+      {isLoggedIn && (
         <li>
           <Link to="/places/new">Add Place</Link>{" "}
         </li>
       )}
-      {isAuth && (
+      {isLoggedIn && (
         <li>
           <button className="btn btn--outline" onClick={logoutHandler}>
             Logout

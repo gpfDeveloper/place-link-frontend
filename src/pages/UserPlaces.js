@@ -1,39 +1,45 @@
 import PlaceList from "../components/places/PlaceList";
 import { useParams } from "react-router";
-
-const DUMMY_PLACES = [
-  {
-    id: "p1",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg",
-    address: "20 W 34th St, New York, NY 10001",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
-    creator: "u1",
-  },
-  {
-    id: "p2",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg",
-    address: "20 W 34th St, New York, NY 10001",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
-    creator: "u2",
-  },
-];
+import { useEffect, useState } from "react";
+import { useHttpClient } from "../hooks/use-http";
+import ErrorModal from "../components/UIs/ErrorModal";
+import LoadingSpinner from "../components/UIs/LoadingSpinner";
 
 const UserPlaces = () => {
   const uid = useParams().uid;
-  const places = DUMMY_PLACES.filter((place) => place.creator === uid);
-  return <PlaceList items={places} />;
+  const [loadedPlaces, setLoadedPlaces] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      try {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/places/user/${uid}`
+        );
+        setLoadedPlaces(responseData.places);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPlaces();
+  }, [sendRequest, uid]);
+
+  const placeDeletedHandler = (pid) => {
+    setLoadedPlaces((prev) => prev.filter((place) => place.id !== pid));
+  };
+  return (
+    <>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className="center mb-4 mt-4">
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && loadedPlaces && (
+        <PlaceList items={loadedPlaces} onDeletePlace={placeDeletedHandler} />
+      )}
+    </>
+  );
 };
 
 export default UserPlaces;
