@@ -1,9 +1,9 @@
 .card {
+  overflow: hidden;
   padding: 2rem;
   background-color: white;
   color: $color-grey-dark;
   border-radius: 10px;
   box-shadow: $shadow-light;
   transition: all 0.3s ease-out;
-
 }

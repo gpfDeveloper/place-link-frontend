@@ -1,13 +1,14 @@
 import Card from "../UIs/Card";
 import PlaceItem from "./PlaceItem";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth-context";
 
 const PlaceList = ({ items, onDeletePlace }) => {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
+  const {uid} = useParams();
   if (items.length === 0) {
-    if (isLoggedIn) {
+    if (uid === userId) {
       return (
         <div className="place-list center">
           <Card>
