@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
     <>
       <Header onOpenSidebar={() => setShowSideBar(true)} />
       <SideDrawer isShow={showSideBar} onClose={() => setShowSideBar(false)} />
-      <main className="container">{children}</main>
+      <main className="main-page container">{children}</main>
       <Footer />
     </>
   );
